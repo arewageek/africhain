@@ -1,14 +1,13 @@
 "use client"
 
 import type React from "react"
-
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { AlertTriangle, CheckCircle, ArrowRight, TrendingUp, Users, Shield, Coins } from "lucide-react"
 import { SectionTitle } from "@/components/ui/section-title"
-import { Card } from "@/components/ui/card"
-import { ProgressBar } from "@/components/ui/progress-bar"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { ProblemCard } from "../problem/problem-card"
+import { SolutionCard } from "../problem/solution-card"
 
 export function ProblemSolutionSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -188,68 +187,5 @@ export function ProblemSolutionSection() {
         <div className="hidden lg:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-32 w-px bg-gradient-to-b from-secondary via-white to-accent opacity-20"></div>
       </div>
     </section>
-  )
-}
-
-interface ProblemCardProps {
-  problem: {
-    title: string
-    description: string
-    icon: React.ElementType
-    stat: number
-    statLabel: string
-  }
-  index: number
-}
-
-function ProblemCard({ problem, index }: ProblemCardProps) {
-  const Icon = problem.icon
-
-  return (
-    <Card className="bg-primary-light/50 border border-white/5 p-5 sm:p-6 backdrop-blur-sm hover:border-secondary/20 transition-all duration-300">
-      <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-        <div className="flex-1">
-          <div className="flex items-center space-x-3 mb-2">
-            <Icon className="w-5 h-5 text-secondary" />
-            <h4 className="font-semibold text-white">{problem.title}</h4>
-          </div>
-          <p className="text-sm text-gray-300 mb-3">{problem.description}</p>
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-400">{problem.statLabel}</span>
-            <span className="text-sm font-medium text-secondary">{problem.stat}%</span>
-          </div>
-          <ProgressBar value={problem.stat} className="mt-2" />
-        </div>
-      </div>
-    </Card>
-  )
-}
-
-interface SolutionCardProps {
-  solution: {
-    title: string
-    description: string
-    icon: React.ElementType
-    color: "accent" | "secondary"
-  }
-  index: number
-}
-
-function SolutionCard({ solution, index }: SolutionCardProps) {
-  const Icon = solution.icon
-  const isAccent = solution.color === "accent"
-
-  return (
-    <Card
-      className={`group bg-primary-light/30 border border-white/5 p-5 sm:p-6 backdrop-blur-sm hover:bg-${solution.color}/5 hover:border-${solution.color}/20 transition-all duration-300`}
-    >
-      <div
-        className={`w-10 h-10 rounded-full bg-${solution.color}/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
-      >
-        <Icon className={`w-5 h-5 text-${solution.color}`} />
-      </div>
-      <h4 className="font-semibold text-white mb-2">{solution.title}</h4>
-      <p className="text-sm text-gray-300">{solution.description}</p>
-    </Card>
   )
 }
